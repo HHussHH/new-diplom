@@ -1,0 +1,50 @@
+.Links {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  gap: 100px;
+  &__card {
+    width: 500px;
+    border: 1px solid #000;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    width: 30%;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  &__img {
+    border-radius: 100px;
+    width: 200px;
+    max-height: 200px;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      width: 50px;
+      height: 50px;
+    }
+  }
+}
