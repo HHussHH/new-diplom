@@ -6,7 +6,10 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@wdio/jasmine-framework": "^8.35.1",
+    "@wdio/selenium-standalone-service": "^8.15.0",
     "axios": "^1.6.7",
+    "chromedriver": "^123.0.1",
     "dompurify": "^3.0.8",
     "moment": "^2.30.1",
     "react": "^18.2.0",
@@ -14,7 +17,8 @@
     "react-router-dom": "^6.22.1",
     "react-scripts": "5.0.1",
     "sass": "^1.70.0",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "webdriverio": "^8.35.1"
   },
   "scripts": {
     "start": "react-scripts start",

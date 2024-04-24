@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./AddLink.scss";
-
+import { ReactComponent as AddPageIcon } from "../../images/AddPageIcon.svg";
 const AddLink = () => {
   const [value, setValue] = useState("");
   const [err, setErr] = useState("");
@@ -15,23 +15,27 @@ const AddLink = () => {
     e.preventDefault();
 
     if (value.length > 0) {
-      const data = await axios.get(
-        `https://api.telegram.org/bot6883424198:AAHZVYXnB-Y5ACF4jaBzYdqAcBrTjX7JFiY/getChat?chat_id=@${value}`
-      );
-      const photo_id = data.data.result.photo.big_file_id;
-      const img = await axios.get(
-        `https://api.telegram.org/bot6883424198:AAHZVYXnB-Y5ACF4jaBzYdqAcBrTjX7JFiY/getFile?file_id=${photo_id}`
-      );
-      await axios.post(`/links/add`, {
-        title: data.data.result.title,
-        desc: data.data.result.description,
-        cat: data.data.result.type,
-        img: `https://api.telegram.org/file/bot6883424198:AAHZVYXnB-Y5ACF4jaBzYdqAcBrTjX7JFiY/${img.data.result.file_path}`,
-        original: value,
-        uid: userId,
-      });
+      try {
+        const data = await axios.get(
+          `https://api.telegram.org/bot6883424198:AAHZVYXnB-Y5ACF4jaBzYdqAcBrTjX7JFiY/getChat?chat_id=@${value}`
+        );
+        const photo_id = data.data.result.photo.big_file_id;
+        const img = await axios.get(
+          `https://api.telegram.org/bot6883424198:AAHZVYXnB-Y5ACF4jaBzYdqAcBrTjX7JFiY/getFile?file_id=${photo_id}`
+        );
+        await axios.post(`/links/add`, {
+          title: data.data.result.title,
+          desc: data.data.result.description,
+          cat: data.data.result.type,
+          img: `https://api.telegram.org/file/bot6883424198:AAHZVYXnB-Y5ACF4jaBzYdqAcBrTjX7JFiY/${img.data.result.file_path}`,
+          original: value,
+          uid: userId,
+        });
 
-      navigate("/");
+        navigate("/");
+      } catch {
+        setErr("Ошибка связанная с сервером. =(");
+      }
     } else {
       setErr("Ошибка данных!");
     }
@@ -39,7 +43,10 @@ const AddLink = () => {
 
   return (
     <div className="AddLink">
-      <h1 className="AddLink__title">Введите группу в формае: название.</h1>
+      <h1 className="AddLink__title">
+        == Введите группу в формате: название ==
+      </h1>
+      <AddPageIcon width="200px" height="200px" />
       <p className="AddLink__subtitle">Пример: psevdoITman</p>
       <div className="AddLink__content">
         <input

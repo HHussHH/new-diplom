@@ -7,9 +7,15 @@
   flex-wrap: wrap;
   font-size: 14px;
   gap: 100px;
+  &__title {
+    display: flex;
+    font-size: 36px;
+    justify-content: center;
+    margin-top: 40px;
+  }
   &__card {
-    width: 500px;
-    border: 1px solid #000;
+    background: rgb(136, 199, 214);
+    border: 2px solid #00000091;
     padding: 10px;
     border-radius: 10px;
     display: flex;
@@ -18,6 +24,7 @@
     align-items: center;
     gap: 25px;
     width: 30%;
+    height: 420px;
   }
   &__content {
     display: flex;
@@ -26,6 +33,7 @@
   }
 
   &__img {
+    border: 2px solid #000;
     border-radius: 100px;
     width: 200px;
     max-height: 200px;

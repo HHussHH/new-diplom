@@ -3,19 +3,17 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Home from "./pages/Main";
 import Navbar from "./components/Navbar/Navbar";
-import Footer from "./components/Footer/Footer";
 import "./style.scss";
 import FAQ from "./components/FAQ/FAQ";
 import AddLink from "./components/AddLink/AddLink";
-import OwnLinks from "./components/Links/AllLinks";
 import AllLinksPage from "./pages/AllLinksPage";
+import PageNotFound from "./pages/PageNotFound";
 
 const Layout = () => {
   return (
     <>
       <Navbar />
       <Outlet />
-      <Footer />
     </>
   );
 };
@@ -26,7 +24,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: "/MyLinks",
         element: <Home />,
       },
       {
@@ -38,12 +36,12 @@ const router = createBrowserRouter([
         element: <AddLink />,
       },
       {
-        path: "/AllLinks",
+        path: "/",
         element: <AllLinksPage />,
       },
       {
         path: "*",
-        element: <h1>404</h1>,
+        element: <PageNotFound />,
       },
     ],
   },

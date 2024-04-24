@@ -2,8 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
 
+  &__title {
+    font-size: 36px;
+    justify-content: center;
+    margin-top: 40px;
+  }
   &__subtitle {
     margin: 20px 0px;
   }

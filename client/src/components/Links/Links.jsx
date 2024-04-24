@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./Links.scss";
-import { ReactComponent as AddToMe } from "../../images/Plus.svg";
-import { ReactComponent as ReadMore } from "../../images/ReadMore.svg";
+import ReadMoreBtn from "./ReadMoreBtn";
+import LastMessage from "../LastMessage/LastMessage";
+import { ReactComponent as Completed } from "../../images/completed.svg";
+
 const userId = JSON.parse(localStorage.getItem("user") || "{}")?.id;
+
 const Links = () => {
   const [links, setLinks] = useState([]);
+  const [openCards, setOpenCards] = useState({});
 
   const cat = useLocation().search;
 
@@ -14,87 +18,83 @@ const Links = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`/links${cat}`);
-        setLinks(res.data);
+        setLinks(
+          res.data.filter((link, index, array) => {
+            // Проверяем, что userID === uid и индекс текущего элемента равен индексу первого вхождения элемента с таким же значением поля "original"
+            return (
+              userId === link.uid &&
+              array.findIndex((obj) => obj.original === link.original) === index
+            );
+          })
+        );
+        // Инициализируем состояние для каждой карточки в начальном состоянии "close"
+        const initialOpenState = res.data.reduce((acc, link) => {
+          return { ...acc, [link.id]: "close" };
+        }, {});
+        setOpenCards(initialOpenState);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
   }, [cat]);
-  // const links = [
-  //   {
-  //     id: 1,
-  //     title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-  //     desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-  //     img: "https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-  //     desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-  //     img: "https://images.pexels.com/photos/6489663/pexels-photo-6489663.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-  //     desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-  //     img: "https://images.pexels.com/photos/4230630/pexels-photo-4230630.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  //   },
-  //   {
-  //     id: 4,
-  //     title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-  //     desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-  //     img: "https://images.pexels.com/photos/6157049/pexels-photo-6157049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  //   },
-  //   {
-  //     id: 5,
-  //     title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-  //     desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-  //     img: "https://images.pexels.com/photos/6157049/pexels-photo-6157049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  //   },
-  //   {
-  //     id: 6,
-  //     title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-  //     desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-  //     img: "https://images.pexels.com/photos/6157049/pexels-photo-6157049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  //   },
-  // ];
+
+  const handleToggleLastMessage = (linkId) => {
+    setOpenCards((prevState) => ({
+      ...prevState,
+      [linkId]: prevState[linkId] === "open" ? "close" : "open",
+    }));
+  };
 
   return (
     <>
+      <h1 className="Links__title">== Личный список сообществ ==</h1>
       <div className="Links">
         {links.map((link) => {
-          if (link.uid === userId) {
-            return (
+          return (
+            <>
               <div className="Links__card" key={link.id}>
                 <img className="Links__img" src={link.img} alt="" />
                 <div className="Links__content">
-                  <Link className="Links__link" to={`/link/${link.id}`}>
-                    <h1>{link.title}</h1>
+                  <Link
+                    className="Links__link"
+                    href={`https://t.me/${link.original}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <a
+                      href={`https://t.me/${link.original}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <h1>{link.title}</h1>
+                    </a>
                   </Link>
-                  <p>{link.desc}</p>
+                  {link.desc.length >= 300
+                    ? link.desc.slice(0, 300) + "..."
+                    : link.desc}
                   <div className="Links__buttons">
-                    <button>
-                      <a
-                        href={`https://t.me/${link.original}`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <ReadMore width="50px" height="50px" />
-                      </a>
-                    </button>
+                    <ReadMoreBtn
+                      onClick={() => handleToggleLastMessage(link.id)}
+                      isOpen={openCards[link.id] === "open"}
+                    />
                     <p>Жанр: {link.cat}</p>
-
                     <button>
-                      <AddToMe width="50px" height="50px" />
+                      <Completed width="50px" height="50px" />
                     </button>
                   </div>
                 </div>
               </div>
-            );
-          }
-          // Если uid не равен userId, то возвращаем null (ничего не отображается)
-          return null;
+              {/* Отображение LastMessage только если состояние open равно "open" */}
+              {openCards[link.id] === "open" && (
+                <LastMessage
+                  status={openCards[link.id]}
+                  original={link.original}
+                  closeClick={() => handleToggleLastMessage(link.id)}
+                />
+              )}
+            </>
+          );
         })}
       </div>
     </>

@@ -18,4 +18,5 @@ app.use("/api/auth", authRoutes);
 app.use("/api/links", linkRoutes);
 
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => console.log(`Сервер запущен на порту ${PORT}`));

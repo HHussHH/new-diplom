@@ -8,12 +8,12 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="navbar__profile">
-        <Link className="navbar__link" to="/">
+        <Link className="navbar__link" to="/MyLinks">
           <h6>Привет, {currentUser?.username} !</h6>
         </Link>
       </div>
 
-      <Link className="navbar__link" to="/AllLinks">
+      <Link className="navbar__link" to="/">
         <h6>Общий список</h6>
       </Link>
       <span className="write">
