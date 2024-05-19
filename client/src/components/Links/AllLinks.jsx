@@ -4,7 +4,6 @@ import axios from "axios";
 import "./Links.scss";
 import AddButton from "./AddButton";
 import gifCat from "../../images/Q8Yu.gif";
-import ReadMoreBtn from "./ReadMoreBtn";
 import LastMessage from "../LastMessage/LastMessage";
 const userId = JSON.parse(localStorage.getItem("user") || "{}")?.id;
 
@@ -77,10 +76,6 @@ const AllLinks = () => {
                       ? link.desc.slice(0, 300) + "..."
                       : link.desc}
                     <div className="Links__buttons">
-                      <ReadMoreBtn
-                        onClick={() => handleToggleLastMessage(link.id)}
-                        isOpen={openCards[link.id] === "open"}
-                      />
                       <p>Жанр: {link.cat}</p>
                       <AddButton original={link.original} />
                     </div>

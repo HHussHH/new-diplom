@@ -9,7 +9,9 @@ const PageNotFound = () => {
         Увы, ты попал на не существующую страницу {`=(`}
       </h1>
       <h2 className="NotFound__404">404</h2>
-      <img className="NotFound__img" src={logo} alt="" />
+      <img className="NotFound__img" src={logo} alt="">
+        te
+      </img>
       <button className="NotFound__btn">Вернуться назад</button>
     </div>
   );

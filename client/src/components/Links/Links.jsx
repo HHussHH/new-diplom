@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./Links.scss";
-import ReadMoreBtn from "./ReadMoreBtn";
+import { ReactComponent as ReadMore } from "../../images/ReadMore.svg";
 import LastMessage from "../LastMessage/LastMessage";
-import { ReactComponent as Completed } from "../../images/completed.svg";
 
 const userId = JSON.parse(localStorage.getItem("user") || "{}")?.id;
 
@@ -39,65 +38,40 @@ const Links = () => {
     fetchData();
   }, [cat]);
 
-  const handleToggleLastMessage = (linkId) => {
-    setOpenCards((prevState) => ({
-      ...prevState,
-      [linkId]: prevState[linkId] === "open" ? "close" : "open",
-    }));
-  };
-
   return (
-    <>
-      <h1 className="Links__title">== Личный список сообществ ==</h1>
-      <div className="Links">
+    <div className="Link">
+      <div className="Link__cards">
         {links.map((link) => {
           return (
-            <>
-              <div className="Links__card" key={link.id}>
-                <img className="Links__img" src={link.img} alt="" />
-                <div className="Links__content">
-                  <Link
-                    className="Links__link"
-                    href={`https://t.me/${link.original}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <a
-                      href={`https://t.me/${link.original}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <h1>{link.title}</h1>
-                    </a>
-                  </Link>
-                  {link.desc.length >= 300
-                    ? link.desc.slice(0, 300) + "..."
-                    : link.desc}
-                  <div className="Links__buttons">
-                    <ReadMoreBtn
-                      onClick={() => handleToggleLastMessage(link.id)}
-                      isOpen={openCards[link.id] === "open"}
-                    />
-                    <p>Жанр: {link.cat}</p>
-                    <button>
-                      <Completed width="50px" height="50px" />
-                    </button>
-                  </div>
-                </div>
+            <div className="Link__card" key={link.id}>
+              <div className="Link__upline">
+                <h2 className="Link__title">{link.title}</h2>
+                <p className="Link__subscribe">Подписаться</p>
               </div>
-              {/* Отображение LastMessage только если состояние open равно "open" */}
-              {openCards[link.id] === "open" && (
-                <LastMessage
-                  status={openCards[link.id]}
-                  original={link.original}
-                  closeClick={() => handleToggleLastMessage(link.id)}
-                />
-              )}
-            </>
+              <p className="Link__desc">
+                {link.desc.length >= 300
+                  ? link.desc.slice(0, 300) + "..."
+                  : link.desc}
+              </p>
+              <div className="Link__img">
+                <img src={link.img} alt={link.title} />
+              </div>
+              <div className="Link__interactions">
+                <button
+                  className="Link__button"
+                  onClick={() => LastMessage(link.original)}
+                >
+                  <ReadMore width="50px" height="50px" />
+                </button>
+                <p className="Link__genre">
+                  <b>Жанр:</b> {link.cat}
+                </p>
+              </div>
+            </div>
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
 

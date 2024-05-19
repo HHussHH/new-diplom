@@ -1,58 +1,66 @@
-.Links {
+.Link {
+  margin-top: 20px;
+  width: calc(100% - 800px);
   display: flex;
-  text-align: center;
-  align-items: center;
+
   justify-content: center;
-  margin-top: 100px;
-  flex-wrap: wrap;
-  font-size: 14px;
-  gap: 100px;
-  &__title {
+  &__cards {
     display: flex;
-    font-size: 36px;
-    justify-content: center;
-    margin-top: 40px;
+    flex-direction: column;
+
+    gap: 50px;
+    margin: 0 auto 50px;
   }
+
   &__card {
-    background: rgb(136, 199, 214);
-    border: 2px solid #00000091;
-    padding: 10px;
+    background: #fff;
+    padding: 20px;
+    width: 740px;
     border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 25px;
-    width: 30%;
-    height: 420px;
   }
-  &__content {
+  &__upline {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__title {
+    margin-left: 10px;
+    font-size: 24px;
+  }
+  &__subscribe {
+    font-weight: 600;
+    cursor: pointer;
+  }
+  &__desc {
+    margin: 10px 0px;
+    line-height: 23px;
+    font-weight: 500;
   }
 
   &__img {
-    border: 2px solid #000;
-    border-radius: 100px;
-    width: 200px;
-    max-height: 200px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    img {
+      width: max-content;
+      height: 600px;
+      border-radius: 5px;
+    }
   }
 
-  &__buttons {
+  &__interactions {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    button {
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 12px;
-      width: 50px;
-      height: 50px;
-    }
+    justify-content: space-between;
+  }
+
+  &__button {
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+
+  &__genre {
+    margin: 0;
   }
 }

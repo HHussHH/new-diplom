@@ -17,6 +17,6 @@ app.use((req, res, next) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/links", linkRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 app.listen(PORT, () => console.log(`Сервер запущен на порту ${PORT}`));

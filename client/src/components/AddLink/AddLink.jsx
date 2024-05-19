@@ -8,9 +8,12 @@ const AddLink = () => {
   const [value, setValue] = useState("");
   const [err, setErr] = useState("");
 
+// получение информации о пользователи
   const navigate = useNavigate();
   const userId = JSON.parse(localStorage.getItem("user") || "{}")?.id;
 
+
+// отправка данных в API telegram  с проверкой валидированных данных
   const handleClick = async (e) => {
     e.preventDefault();
 
@@ -40,7 +43,6 @@ const AddLink = () => {
       setErr("Ошибка данных!");
     }
   };
-
   return (
     <div className="AddLink">
       <h1 className="AddLink__title">

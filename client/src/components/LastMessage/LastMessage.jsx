@@ -1,50 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./LastMessage.scss";
+import { MessageContext } from "./ModalWindow";
 import axios from "axios";
 
-const LastMessage = ({ status, original, closeClick }) => {
-  const [info, setInfo] = useState(null);
+const LastMessage = ({ original }) => {
+  // const contextProps = useContext(MessageContext);
+  // const toggleWindowOpen = () => contextProps.setIsOpen((open) => !open);
+  // // const handleBodyClick = (event) => {
+  // //   // Предотвращаем всплытие события клика
+  // //   event.stopPropagation();
+  // // };
 
+  const [info, setInfo] = useState({});
   useEffect(() => {
     const getInfo = async () => {
       try {
         const response = await axios.get(
           `https://api.telegram.org/bot6883424198:AAHZVYXnB-Y5ACF4jaBzYdqAcBrTjX7JFiY/getChat?chat_id=@${original}`
         );
-        setInfo(response.data.result);
+        const result = await response.data.result;
+        setInfo(result);
+        return result;
       } catch (error) {
-        console.error("Error fetching chat info:", error);
+        console.log(error);
       }
     };
 
     getInfo();
   }, [original]);
 
-  const handleBodyClick = (event) => {
-    // Предотвращаем всплытие события клика
-    event.stopPropagation();
-  };
-  let styleClass = `LastMessage__body LastMessage__${status}`;
-
   return (
-    <div className="LastMessage" onClick={closeClick}>
-      <div className={styleClass} onClick={handleBodyClick}>
-        {info && (
-          <>
-            <h1 className="LastMessage__title">{info.title}</h1>
-            {info.pinned_message ? (
-              <div className="LastMessage__text">
-                {info.pinned_message.caption}
-              </div>
-            ) : (
-              "Данные отсутствуют"
-            )}
-            <button className="LastMessage__button" onClick={closeClick}>
-              Прочитал
-            </button>
-          </>
-        )}
-      </div>
+    <div>
+      <p>123 - {info.name}</p>
+      <button onClick={() => {}}>Close</button>
     </div>
   );
 };

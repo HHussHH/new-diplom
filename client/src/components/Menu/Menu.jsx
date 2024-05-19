@@ -1,7 +1,6 @@
-import React from "react";
+import React, { Children } from "react";
 import { Link } from "react-router-dom";
 import "./Menu.scss";
-import Footer from "../Footer/Footer";
 import { ReactComponent as All } from "../../images/cat-all.svg";
 import { ReactComponent as News } from "../../images/cat-news.svg";
 import { ReactComponent as Bisness } from "../../images/cat-bisness.svg";
@@ -17,7 +16,6 @@ const Menu = () => {
   return (
     <div className="sidebar">
       <div>
-        <h2>Категории:</h2>
         <ul>
           <Link className="sidebar__link" to="/">
             <All width="30px" height="30px" />
@@ -61,7 +59,11 @@ const Menu = () => {
           </Link>
         </ul>
       </div>
-      <Footer />
+      <footer>
+        <span>
+          Made with ♥️ by <b>M.N.I</b>.
+        </span>
+      </footer>
     </div>
   );
 };
