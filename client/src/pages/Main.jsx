@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div className="Main">
       <Menu />
-      <Links />
+      <Links type="own" />
     </div>
   );
 };

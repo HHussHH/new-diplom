@@ -17,39 +17,63 @@ const Menu = () => {
     <div className="sidebar">
       <div>
         <ul>
-          <Link className="sidebar__link" to="/">
+          <Link className="sidebar__link" to={`${window.location.pathname}`}>
             <All width="30px" height="30px" />
             <h6>Все</h6>
           </Link>
-          <Link className="sidebar__link" to="/?cat=Новости">
+          <Link
+            className="sidebar__link"
+            to={`${window.location.pathname}?cat=Новости`}
+          >
             <News width="30px" height="30px" />
             <h6>Новости</h6>
           </Link>
-          <Link className="sidebar__link" to="/?cat=Бизнес">
+          <Link
+            className="sidebar__link"
+            to={`${window.location.pathname}?cat=Бизнес`}
+          >
             <Bisness width="30px" height="30px" />
             <h6>Бизнес</h6>
           </Link>
-          <Link className="sidebar__link" to="/?cat=Фильмы">
+          <Link
+            className="sidebar__link"
+            to={`${window.location.pathname}?cat=Фильмы`}
+          >
             <Film width="30px" height="30px" />
             <h6>Фильмы/Сериалы</h6>
           </Link>
-          <Link className="sidebar__link" to="/?cat=Книги">
+          <Link
+            className="sidebar__link"
+            to={`${window.location.pathname}?cat=Книги`}
+          >
             <Books width="30px" height="30px" />
             <h6>Книги</h6>
           </Link>
-          <Link className="sidebar__link" to="/?cat=Подкасты">
+          <Link
+            className="sidebar__link"
+            to={`${window.location.pathname}?cat=Подкасты`}
+          >
             <Podcasts width="30px" height="30px" />
             <h6>Подкасты</h6>
           </Link>
-          <Link className="sidebar__link" to="/?cat=ИТ_Бизнес">
+          <Link
+            className="sidebar__link"
+            to={`${window.location.pathname}?cat=ИТ_Бизнес`}
+          >
             <It width="30px" height="30px" />
             <h6>IT Бизнес</h6>
           </Link>
-          <Link className="sidebar__link" to="/?cat=Развлечения">
+          <Link
+            className="sidebar__link"
+            to={`${window.location.pathname}?cat=Развлечения`}
+          >
             <Fun width="30px" height="30px" />
             <h6>Развлечения</h6>
           </Link>
-          <Link className="sidebar__link" to="/?cat=Другое">
+          <Link
+            className="sidebar__link"
+            to={`${window.location.pathname}?cat=Другое`}
+          >
             <Other width="30px" height="30px" />
             <h6>Другое</h6>
           </Link>

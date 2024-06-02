@@ -8,19 +8,12 @@ import FAQ from "./components/FAQ/FAQ";
 import AddLink from "./components/AddLink/AddLink";
 import AllLinksPage from "./pages/AllLinksPage";
 import PageNotFound from "./pages/PageNotFound";
-import ModalWindow from "./components/LastMessage/ModalWindow";
-import LastMessage from "./components/LastMessage/LastMessage";
 
 const Layout = () => {
   return (
     <>
       <Navbar />
       <Outlet />
-
-      {/* Модальные окна =====================*/}
-      <ModalWindow>
-        <LastMessage />
-      </ModalWindow>
     </>
   );
 };

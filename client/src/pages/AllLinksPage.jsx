@@ -1,12 +1,12 @@
 import React from "react";
 import Menu from "../components/Menu/Menu";
-import AllLinks from "../components/Links/AllLinks";
+import Links from "../components/Links/Links";
 const AllLinksPage = () => {
   return (
-    <>
+    <div className="Main">
       <Menu />
-      <AllLinks />
-    </>
+      <Links type="all" />
+    </div>
   );
 };
 
